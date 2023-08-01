@@ -11,14 +11,18 @@
             topicName = "jocaled/in"
 
             // Create a client instance
-            client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "clientId-96WBgB6JRT");
+            //client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "clientId-96WBgB6JRT");
+            client = new Paho.MQTT.Client("test.mosquitto.org", 8081, "clientId-96WBgB6JRT");
 
             // set callback handlers
             client.onConnectionLost = onConnectionLost;
             client.onMessageArrived = onMessageArrived;
 
             // connect the client
-            client.connect({onSuccess:onConnect});
+            client.connect({
+                useSSL: true,
+                onSuccess:onConnect
+            });
 
 
             // called when the client connects
